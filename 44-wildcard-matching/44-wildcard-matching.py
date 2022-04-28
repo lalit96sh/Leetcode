@@ -6,7 +6,7 @@ class Solution:
         star_j=-1
         while i <len(s):
             
-            if j>=len(p) or ((p[j] not in {"?","*"})  and p[j]!=s[i]):
+            if j==len(p) or ((p[j] not in {"?","*"})  and p[j]!=s[i]):
                 if star_j==-1:
                     return False
                 j = star_j+1
