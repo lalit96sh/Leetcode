@@ -6,9 +6,9 @@ class Solution:
             
             first,last = _.split("@")
             
-            first = first.replace(".","")
-            
             first = first.split("+")[0]
+            
+            first = first.replace(".","")
             
             mp.add("@".join([first,last]))
         
