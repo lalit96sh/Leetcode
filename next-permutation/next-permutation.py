@@ -18,14 +18,16 @@ class Solution:
         if i<0:
             r(nums,0)
             return
-        
-        k = n-1
-        while i<k:
-            if nums[i]<nums[k]:
-                break
-            k-=1
-        
-        nums[i],nums[k] = nums[k],nums[i]
+        left = i
+        right = n-1
+        while left<right:
+            mid = (left+right+1)//2
+            if nums[mid]>nums[i]:
+                left=mid
+            else:
+                right = mid-1
+        print(i,left,right,nums)
+        nums[i],nums[left] = nums[left],nums[i]
         
         r(nums,i+1)
         
