@@ -26,9 +26,9 @@ class Solution:
                 else:
                     return (max(mxl1,mxl2)+min(mnr1,mnr2))/2.0
             elif mxl1 > mnr2:
-                end = end-1
+                end = mid1-1
             else:
-                start=start+1
+                start=mid1+1
         return None
                 
                     
