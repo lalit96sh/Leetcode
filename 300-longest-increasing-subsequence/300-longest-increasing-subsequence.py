@@ -20,6 +20,5 @@ class Solution:
                         left = mid+1
                     else:
                         end=mid
-                r[left] = nm
-        print(r)        
+                r[left] = nm 
         return len(r)
