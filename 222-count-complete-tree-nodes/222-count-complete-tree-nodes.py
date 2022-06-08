@@ -13,17 +13,36 @@ class Solution:
                 ans+=1
                 root=root.left
             return ans
+        def node_present(last_level_index,d,root):
+            
+            left = 0
+            right = 2**d-1
+            for _ in range(d):
+                mid = left+(right-left)//2
+                if last_level_index <= mid:
+                    root=root.left
+                    right = mid
+                else:
+                    root = root.right
+                    left = mid+1
+            return root is not None
         
         def help(root):
             if not root:
                 return 0
             
             l = depth(root.left)
-            r = depth(root.right)
             
-            if l==r:
-                return (2**l)+help(root.right)
-            return (2**r)+help(root.left)
+            left = 0
+            right = 2**l-1
+            while left<=right:
+                mid = left+(right-left)//2
+                if node_present(mid,l,root):
+                    left = mid+1
+                else:
+                    right=mid-1
+            
+            return 2**l-1+left
                     
                 
         return help(root)
