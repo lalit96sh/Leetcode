@@ -21,18 +21,18 @@ class Solution:
                 if tmap[ss]==mp[ss]:
                     cnt+=1
             # print(start,i,cnt,mp)
-            if cnt==keycnt:
+            # if cnt==keycnt:
                 
-                while cnt==keycnt:
-                    if tmap[s[start]]:
-                        if tmap[s[start]]==mp[s[start]]:
-                            cnt-=1
-                        mp[s[start]]-=1
-                    
-                    if anslen>i-start+1:
-                        anslen = i-start+1
-                        ans = s[start:i+1]
-                    start+=1
+            while cnt==keycnt:
+                if tmap[s[start]]:
+                    if tmap[s[start]]==mp[s[start]]:
+                        cnt-=1
+                    mp[s[start]]-=1
+
+                if anslen>i-start+1:
+                    anslen = i-start+1
+                    ans = s[start:i+1]
+                start+=1
         return ans
             
             
