@@ -6,7 +6,6 @@ class Solution:
 
         for idx, s in enumerate(secret):
             g = guess[idx]
-            print("----------")
             print(h)
             if s == g: 
                 bulls += 1
@@ -14,6 +13,5 @@ class Solution:
                 cows += int(h[s] < 0) + int(h[g] > 0)
                 h[s] += 1
                 h[g] -= 1
-            print(h)
         return "{}A{}B".format(bulls, cows)
                 
