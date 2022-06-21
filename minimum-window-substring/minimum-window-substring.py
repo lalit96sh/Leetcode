@@ -23,7 +23,7 @@ class Solution:
             # print(start,i,cnt,mp)
             if cnt==keycnt:
                 
-                while start<=i and cnt==keycnt:
+                while cnt==keycnt:
                     if tmap[s[start]]:
                         if tmap[s[start]]==mp[s[start]]:
                             cnt-=1
@@ -32,8 +32,6 @@ class Solution:
                     if anslen>i-start+1:
                         anslen = i-start+1
                         ans = s[start:i+1]
-                    start+=1
-                while start<len(s) and not tmap[s[start]]:
                     start+=1
         return ans
             
