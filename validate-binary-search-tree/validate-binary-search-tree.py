@@ -10,9 +10,7 @@ class Solution:
         def f(root,mn=float("-inf"),mx=float("inf")):
             if not root:
                 return True
-            if root.val<=mn:
-                return False
-            if root.val>=mx:
+            if root.val<=mn or root.val>=mx:
                 return False
             return f(root.left,mn,root.val) and f(root.right,root.val,mx)
         return f(root)
