@@ -24,5 +24,5 @@ class Solution:
                 return root
             
             return (left or right)
-        
-        return f(root)
+        val = f(root)
+        return val if count == 2 else None
