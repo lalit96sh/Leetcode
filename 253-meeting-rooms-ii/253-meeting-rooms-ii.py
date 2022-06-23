@@ -13,9 +13,7 @@ class Solution:
             if end[j]<=start[i]:
                 r-=1
                 j+=1
-            else:
-                i+=1
-                r+=1
-            ans=max(ans,r)
-        return ans
+            i+=1
+            r+=1
+        return r
                 
