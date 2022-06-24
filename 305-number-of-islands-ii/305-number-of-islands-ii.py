@@ -36,7 +36,7 @@ class Union(object):
         if self.sz[i] > self.sz[j]:
             i, j = j, i
         self.id[i] = j
-        self.sz[j] += self.sz[i]
+        self.sz[j] += 1
         self.count -= 1
         
         
