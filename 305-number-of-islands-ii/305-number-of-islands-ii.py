@@ -25,7 +25,7 @@ class Union(object):
 
     def root(self, i):
         while i != self.id[i]:
-            self.id[i] = self.id[self.id[i]]
+            # self.id[i] = self.id[self.id[i]]
             i = self.id[i]
         return i
 
