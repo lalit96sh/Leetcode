@@ -15,7 +15,7 @@ class Solution:
             while cnt>k:
                 mp[s[start]]-=1
                 if not mp[s[start]]:
-                    del mp[s[start]]
+                    # del mp[s[start]]
                     cnt-=1
                 start+=1
             l = max(l,i-start+1)
