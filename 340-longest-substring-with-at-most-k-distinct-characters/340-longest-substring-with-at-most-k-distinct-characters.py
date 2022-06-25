@@ -20,5 +20,5 @@ class Solution:
                 start+=1
             l = max(l,i-start+1)
         
-        return max(l,n-start)
+        return l
         
