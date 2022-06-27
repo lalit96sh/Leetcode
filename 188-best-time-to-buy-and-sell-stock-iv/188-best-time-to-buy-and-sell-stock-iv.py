@@ -11,12 +11,9 @@ class Solution:
         # print("--------------------")
         for i in range(1,n):
             for kk in range(1,k+1):
-                # print("transaction {} price {}".format(kk,i))
+                
                 mn[kk] = min(mn[kk],prices[i]-dp[kk-1])
                 dp[kk] = max(dp[kk],prices[i]-mn[kk])
-                # print(mn)
-                # print(dp)
-            # print("--------------------")
                 
         return dp[k]
             
