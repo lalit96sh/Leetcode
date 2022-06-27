@@ -11,9 +11,10 @@ class Solution:
         # print("--------------------")
         for i in range(1,n):
             for kk in range(1,k+1):
-                
-                mn[kk] = min(mn[kk],prices[i]-dp[kk-1])
-                dp[kk] = max(dp[kk],prices[i]-mn[kk])
+                if mn[kk]>prices[i]-dp[kk-1]:
+                    mn[kk] = prices[i]-dp[kk-1]
+                else:
+                    dp[kk] = max(dp[kk],prices[i]-mn[kk])
                 
         return dp[k]
             
