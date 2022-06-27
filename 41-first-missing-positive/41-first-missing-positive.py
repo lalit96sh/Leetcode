@@ -19,7 +19,7 @@ class Solution:
         # print(nums)
         for i in range(n):
             # print(nums[nums[i]-1], nums[i])
-            if nums[nums[i]-1] != i+1:
+            if nums[i] != i+1:
                 return i+1
         return n+1
         
