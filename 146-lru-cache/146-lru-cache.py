@@ -1,84 +1,73 @@
-class LRUCache(object):
-    class Node:
-        def __init__(self,key=None,val=None):
-            self.val = val
-            self.key = key
-            self.next = None
-            self.prev = None
-        
-
-    def __init__(self, capacity):
-        """
-        :type capacity: int
-        """
-        self.capacity = capacity
-        self.dict = {}
-        self.size = 0
-        
-        self.head = self.Node()
-        self.tail = self.Node()
-        self.head.next = self.tail
-        self.tail.prev = self.head
+class Node:
     
-    def move_to_front(self,node):
-        next = self.head.next
+    def __init__(self,key=None,val=None):
+        self.key = key
+        self.val = val
+        self.next = self.prev = None
         
+class DLL:
+    
+    def __init__(self):
+        self.head = Node()
+        self.head.next = self.head.prev = self.head
         
+    def delete_link(self,node):
+        node.next.prev = node.prev
+        node.prev.next = node.next
+        
+    def link_node_to_front(self,node):
+        
+        node.next = self.head.next
         node.prev = self.head
-        node.next = next
         
-        self.head.next = node
-        next.prev = node
+        node.prev.next = node
+        node.next.prev = node
         
-    def delete_node(self,node):
-        prev = node.prev
-        next = node.next
+    def move_node_to_front(self,node):
+        self.delete_link(node)
+        self.link_node_to_front(node)
         
-        prev.next = next
-        next.prev = prev
-        
-    def delete_from_end(self):
-        node = self.tail.prev
-        del self.dict[node.key]
-        self.delete_node(node)
-
-    def add(self,key,val):
-        if self.dict.get(key):
-            node = self.dict.get(key)
-            node.val = val
-            self.delete_node(node)
-        else:
-            self.size+=1
-            node = self.Node(key,val)
-            self.dict[key]=node
-        self.move_to_front(node)
+    def pop_node(self):
+        node = self.head.prev
+        self.delete_link(node)
         return node
 
-    def get(self, key):
-        """
-        :type key: int
-        :rtype: int
-        """
-        if self.dict.get(key):
-            node = self.dict.get(key)
-            self.delete_node(node)
-            self.move_to_front(node)
-            return self.dict[key].val
-        return -1
+class LRUCache:
 
-    def put(self, key, value):
-        """
-        :type key: int
-        :type value: int
-        :rtype: None
-        """
-        node = self.add(key,value)
-        if self.size>self.capacity:
-            self.size-=1
-            self.delete_from_end()
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.size = 0
+        self.dll = DLL()
+        self.lookup = {}
+
+    def get(self, key: int) -> int:
+        if key not in self.lookup:
+            return -1
         
+        node = self.lookup[key]
+        self.dll.move_node_to_front(node)
+        return node.val
+
+    def put(self, key: int, value: int) -> None:
         
-        
+        if key in self.lookup:
+            node = self.lookup[key]
+            node.val = value
+            self.dll.move_node_to_front(node)
+        else:
+            if self.size == self.capacity:
+                self.size-=1
+                node = self.dll.pop_node()
+                del self.lookup[node.key]
+            
+            self.size+=1
+            
+            node = Node(key,value)
+            self.dll.link_node_to_front(node)
+            self.lookup[key] = node
+            
+            
+            
 
 
 # Your LRUCache object will be instantiated and called as such:
