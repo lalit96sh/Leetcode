@@ -6,31 +6,15 @@
 class Solution:
     def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
         
-        _sum = 0
-        
-        dummy = ListNode()
+        cur = dummy = ListNode(0)
         dummy.next = head
-        mp = {0: dummy}
-        
-        node = head
-        while node:
-            
-            _sum +=  node.val
-            if _sum in mp:
-                prev_node = mp[_sum]
-                
-                temp = prev_node.next
-                temp_sum = _sum
-                while temp!=node:
-                    temp_sum += temp.val
-                    del mp[temp_sum]
-                    temp = temp.next
-                    
-                    
-                prev_node.next = node.next
-                
-            else:
-                mp[_sum] = node
-                
-            node = node.next
+        prefix = 0
+        seen = collections.OrderedDict()
+        while cur:
+            prefix += cur.val
+            node = seen.get(prefix, cur)
+            while prefix in seen:
+                seen.popitem()
+            seen[prefix] = node
+            node.next = cur = cur.next
         return dummy.next
