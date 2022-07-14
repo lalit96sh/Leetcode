@@ -19,7 +19,8 @@ class Solution:
             for email in emails:
                 if email in ownership:
                     uf.union(i, ownership[email])
-                ownership[email] = i
+                else:
+                    ownership[email] = i
         
         # Append emails to correct index
         ans = collections.defaultdict(list)
