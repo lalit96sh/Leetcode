@@ -7,6 +7,6 @@ class Solution:
             n,mod = divmod(n,-2)
             if mod<0:
                 n+=(2-1)
-                mod+=2
-            ans = str(mod)+ans
+                # mod+=2
+            ans = str(abs(mod))+ans
         return ans or "0"
