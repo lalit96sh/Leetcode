@@ -2,8 +2,8 @@ class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         
         n = len(temperatures)
-        st = []
         ans = [0]*n
+        # st = []
         
 #         for i in range(n):
             
