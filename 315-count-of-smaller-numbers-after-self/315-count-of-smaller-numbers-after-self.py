@@ -41,7 +41,7 @@ class Solution:
                 temp.append(nm[i])
                 i+=1
             while j<=right:
-                number_of_elemnts_smaller_than_left+=1
+                # number_of_elemnts_smaller_than_left+=1
                 temp.append(nm[j])
                 j+=1
                 
