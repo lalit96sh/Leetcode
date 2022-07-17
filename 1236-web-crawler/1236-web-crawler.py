@@ -23,12 +23,13 @@ class Solution:
         
         
         
-        q = [startUrl]
+        q = collections.deque()
+        q.append(startUrl)
         ans = []
         vis = set()
         vis.add(startUrl)
         while q:
-            url = q.pop(0)
+            url = q.popleft()
             ans.append(url)
             
             for child_url in htmlParser.getUrls(url):
