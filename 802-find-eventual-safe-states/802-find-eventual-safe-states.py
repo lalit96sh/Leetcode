@@ -1,5 +1,30 @@
 class Solution:
     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+        
+        ######## dfs
+        
+        n = len(graph)
+        vis = {}
+        
+        def dfs(node):
+            if node in  vis:
+                return vis[node]
+            
+            vis[node] = True
+            
+            
+            for i in graph[node]:
+                if dfs(i):
+                    return True
+            
+            
+            vis[node] = False
+            return False
+        
+        return [i for i in range(n) if not dfs(i)]
+        
+        
+        #######################
         n = len(graph)
         out = collections.defaultdict(list)
         outdegree = collections.defaultdict(int)
