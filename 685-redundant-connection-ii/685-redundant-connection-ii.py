@@ -37,8 +37,9 @@ class Solution:
                 ans1 = [p[d],d]
                 ans2 = [s,d]
                 edges[i][1]=0
-            else:
-                p[d] = s
+                break
+            
+            p[d] = s
             
             
         
