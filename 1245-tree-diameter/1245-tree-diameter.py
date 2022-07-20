@@ -1,7 +1,6 @@
 class Solution:
     def treeDiameter(self, edges: List[List[int]]) -> int:
         
-        dia = {}
         n = len(edges)
         
         mp = collections.defaultdict(list)
@@ -11,10 +10,6 @@ class Solution:
             mp[d].append(s)
         
         def dfs(root,parent):
-            if root in dia:
-                return dia[root]
-            
-            nodes = 1
             child_max = 0
             second_max = 0
             dmax = 0
@@ -32,14 +27,8 @@ class Solution:
                     
             
             
-            dia[root] = max(1+child_max+second_max, dmax), 1+child_max
-            return dia[root]
-        ans = 0
-        for i in range(n+1):
-            if i not in dia:
-                dfs(i,None)
-                
-        return max([i[0] for i in dia.values()]) - 1
+            return  max(1+child_max+second_max, dmax), 1+child_max
+        return dfs(0,None)[0]-1
         
         
                     
