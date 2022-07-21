@@ -9,10 +9,10 @@ class Solution:
         return knows(a, b)
     
     def findCelebrity(self, n: int) -> int:
-        self.n = n
+        # self.n = n
         celebrity_candidate = 0
         for i in range(1, n):
-            if self.cachedKnows(celebrity_candidate, i):
+            if knows(celebrity_candidate, i):
                 celebrity_candidate = i
         
         for i in range(n):
