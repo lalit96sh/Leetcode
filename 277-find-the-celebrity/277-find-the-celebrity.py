@@ -3,32 +3,25 @@
 # def knows(a: int, b: int) -> bool:
 
 class Solution:
+     
+    @lru_cache(maxsize=None)
+    def cachedKnows(self, a, b):
+        return knows(a, b)
+    
     def findCelebrity(self, n: int) -> int:
-        v = [0,1]
-        
-        next = 2
-        while True:
-            x = v[0]
-            y = v[1]
-            if knows(x,y)==True:
-                v.remove(x)
-            else:
-                v.remove(y)
-            
-            if next==n:
-                break
-            v.append(next)    
-            next+=1
-        
-        celebrity = v[0]
+        self.n = n
+        celebrity_candidate = 0
+        for i in range(1, n):
+            if self.cachedKnows(celebrity_candidate, i):
+                celebrity_candidate = i
         
         for i in range(n):
-            if i!=celebrity and (knows(i,celebrity)==0 or knows(celebrity,i)==1):
+            if i!=celebrity_candidate and (knows(i,celebrity_candidate)==0 or knows(celebrity_candidate,i)==1):
                 return -1
             
                     
                     
-        return celebrity
+        return celebrity_candidate
                     
              
                     
