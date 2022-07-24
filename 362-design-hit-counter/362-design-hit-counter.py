@@ -6,7 +6,7 @@ class HitCounter:
         
 
     def hit(self, timestamp: int) -> None:
-        self.clear(timestamp)
+        # self.clear(timestamp)
         self.window.append(timestamp)
         
     def clear(self, timestamp):
