@@ -1,15 +1,28 @@
 class Solution:
-    def longestRepeatingSubstring(self, s: str) -> int:
+    def longestRepeatingSubstring(self, st: str) -> int:
+        n = len(st)
         
-        n = len(s)
-        for l in range(n-1,0,-1):
+        
+        def is_present(l):
             mp = set()
             for i in range(n-l+1):
-                if s[i:i+l] in mp:
-                    return l
-                mp.add(s[i:i+l])
+                if st[i:i+l] in mp:
+                    return True
+                mp.add(st[i:i+l])
+            return False
         
-        return 0
+        
+        s = 0
+        e = n
+        
+        while s<e:
+            l = (s+e+1)//2
+            if is_present(l):
+                s = l
+            else:
+                e=l-1
+        
+        return s
                 
                 
                 
