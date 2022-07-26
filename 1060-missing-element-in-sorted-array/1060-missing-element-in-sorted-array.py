@@ -19,4 +19,4 @@ class Solution:
         
         diff =  nums[l]-nums[0]-l
         
-        return nums[l] + (k-diff)
+        return nums[0]+k+l
