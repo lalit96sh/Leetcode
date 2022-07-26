@@ -17,6 +17,5 @@ class Solution:
             else:
                 r = mid-1
         
-        diff =  nums[l]-nums[0]-l
         
         return nums[0]+k+l
