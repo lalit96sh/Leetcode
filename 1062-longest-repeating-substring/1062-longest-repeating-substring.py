@@ -13,7 +13,7 @@ class Solution:
         
         
         s = 0
-        e = n
+        e = n-1
         
         while s<e:
             l = (s+e+1)//2
