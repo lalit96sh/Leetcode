@@ -8,13 +8,10 @@ class Solution:
         
         while l<r:
             mid = (l+r)//2
-            if nums[mid]<nums[l]:
-                r = mid
-                
-            elif nums[mid]>nums[r]:
+            if nums[mid]>nums[r]:
                 l = mid+1
             else :
-                r-=1
+                r=mid
         return nums[l]
                 
             
