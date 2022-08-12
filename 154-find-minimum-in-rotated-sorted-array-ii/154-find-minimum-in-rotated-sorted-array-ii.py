@@ -12,5 +12,7 @@ class Solution:
             elif nums[mid]>nums[r]:
                 l = mid+1
             else :
+                if nums[r-1]>nums[r]:
+                    l = r
                 r-=1
         return nums[l]
