@@ -9,6 +9,7 @@ class Solution:
         n = len(nums)
         for j in range(n):
             if nums[j]!=0:
-                nums[j],nums[i] = nums[i],nums[j]
+                if i!=j:
+                    nums[j],nums[i] = nums[i],nums[j]
                 i+=1
         
