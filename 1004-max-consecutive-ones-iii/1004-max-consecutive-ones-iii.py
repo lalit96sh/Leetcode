@@ -9,13 +9,12 @@ class Solution:
             if num==0:
                 cnt+=1
             
-            while cnt>k:
+            if cnt>k:
                 if nums[start]==0:
                     cnt-=1
                 start+=1
             
-            ans = max(ans,i-start+1)
         
-        return ans
+        return i-start+1
             
         
