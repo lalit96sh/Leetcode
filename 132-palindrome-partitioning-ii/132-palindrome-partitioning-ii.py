@@ -17,6 +17,6 @@ class Solution:
                     mp[k] = min(mp[j-1]+1,mp[k])
                     j-=1
                     k+=1
-        return mp[k-1]            
+        return mp[n-1]            
         
         
