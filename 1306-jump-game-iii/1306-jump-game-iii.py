@@ -9,7 +9,7 @@ class Solution:
         v = set()
         v.add(start)
         while q:
-            i = q.pop()
+            i = q.pop(0)
             num = a[i]
             if num==0:
                 return True
