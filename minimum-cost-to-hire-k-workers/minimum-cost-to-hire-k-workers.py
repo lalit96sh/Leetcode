@@ -1,22 +1,19 @@
 class Solution:
     def mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:
         
-        qwr = sorted((w/q,q,w) for q,w  in zip(quality,wage))
+        nums = sorted((q,w,w/q) for q,w  in zip(quality,wage))
         
-        
-        quality_sum = 0
-        from heapq import heappush,heappop
+        from heapq import heappop,heappush
         h = []
+        qsum = 0
         ans = float("inf")
-        
-        for r,q,w in qwr:
-            
-            heappush(h,-q)
-            quality_sum+=q
-            
+        for q,w,r in nums:
+            heappush(h,(-r,q))
+            qsum+=q
             if len(h)>k:
-                quality_sum+=heappop(h)
-            
+                rat,quality = heappop(h)
+                qsum -= quality
             if len(h)==k:
-                ans = min(ans,r*quality_sum)
+                ans = min(ans,-h[0][0]*qsum)
+        
         return ans
