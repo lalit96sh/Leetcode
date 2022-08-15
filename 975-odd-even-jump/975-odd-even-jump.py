@@ -17,9 +17,16 @@ class Solution:
 
         higher, lower = [0] * n, [0] * n
         higher[-1] = lower[-1] = 1
+        # print(A)
+        # print(next_higher)
+        # print(next_lower)
+        # print("----")
         for i in range(n - 1)[::-1]:
             higher[i] = lower[next_higher[i]]
             lower[i] = higher[next_lower[i]]
+            # print(higher)
+            # print(lower)
+            # print("--")
         return sum(higher)
             
             
