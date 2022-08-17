@@ -1,29 +1,43 @@
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        if not nums:
-            return []
         nums.sort()
-        n = len(nums)
-        if len(nums)<3 or nums[0]*3 > 0 or nums[n-1]<0:
-            return []
+        required = 0
         ans = []
-        for k in range(n-1,1,-1):
-            if k<n-1 and nums[k]==nums[k+1]:
-                continue
-            kval = nums[k]
-            i = 0
-            j = k-1
-            while i<j:
-                if nums[i]+nums[j]+kval == 0:
-                    ans.append([nums[i],nums[j],kval])
-                    i+=1
-                    j-=1
-                    while i<n and nums[i]==nums[i-1]:
-                        i+=1
-                        
-                elif nums[i]+nums[j]+kval> 0:
-                    j-=1
-                else:
-                    i+=1
+        n = len(nums)
+        
+        if nums[n-1]*3 < required:
+            return []
+        
+        def util(start,k,target,cur):
+            if n-start<k or nums[start]*k>target:
+                return
+            
+            if k==2:
+                l = start
+                r = n-1
+                
+                while l<r:
+                    if nums[l]+nums[r]==target:
+                        ans.append(cur+[nums[l],nums[r]])
+                        l+=1
+                        r-=1
+                        while l<r and nums[l]==nums[l-1]:
+                            l+=1
+                    elif nums[l]+nums[r]<target:
+                        l+=1
+                    else:
+                        r-=1
+                
+            else:
+                
+                for i in range(start,n):
+                    if i>0 and nums[i]==nums[i-1]:
+                        continue
+                    util(i+1,k-1,target-nums[i],cur+[nums[i]])
+        
+        util(0,3,required,[])
+                
+                
+        
         return ans
                     
