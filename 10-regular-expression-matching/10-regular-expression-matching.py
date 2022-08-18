@@ -1,32 +1,21 @@
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
-        
-        ns = len(s)
-        np = len(p)
-
-        
-        dp = [[False]*(np+1) for _ in range(ns+1)]
-        
-        dp[0][0] = True
-        
-        for i in range(ns+1):
-            
-            for j in range(1,np+1):
+        memo = {}
+        def dp(s_start,p_start):
+            if (s_start,p_start) not in memo:
+                if p_start==len(p):
+                    ans = (s_start==len(s))
+                else:
+                    letter_match = s_start<len(s) and p[p_start] in [".", s[s_start]]
+                    
+                    if p_start+1<len(p) and p[p_start+1]=="*":
+                        ans = dp(s_start, p_start+2) or (letter_match and dp(s_start+1,p_start))
+                    else:
+                        ans = letter_match and dp(s_start+1,p_start+1)
                 
-                if i==0:
-                    if p[j-1]=="*":
-                        dp[i][j] = dp[i][j-2]
-                    continue
-                    
-                if s[i-1]==p[j-1] or p[j-1]==".":
-                    dp[i][j] = dp[i-1][j-1]
-                    
-                elif p[j-1]=="*":
-                    dp[i][j] = dp[i][j-2]
-                    
-                    if s[i-1]==p[j-2] or p[j-2]==".":
-                        dp[i][j] = dp[i][j] or dp[i-1][j]
-                        
-        return dp[ns][np]
+                
+                memo[(s_start,p_start)] = ans
+            return memo[(s_start,p_start)]
+        return dp(0,0)
                     
                 
