@@ -26,12 +26,7 @@ class Solution:
             pflag = l_pflag or r_pflag
             qflag = l_qflag or r_qflag
             
-            val = 0
-            
-            if pflag:
-                val+=1
-            if qflag:
-                val+=1
+            val = int(pflag)+int(qflag)
             
             return lv+rv+val, pflag or root.val==p , qflag or root.val==q
         
