@@ -1,28 +1,24 @@
 class Solution:
     def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
-        
         n = len(books)
-        memo = {}
-        def dfs(start,width_remaining,highest):
-            if start==n:
-                return 0
-            if (start,width_remaining,highest) in memo:
-                return memo[(start,width_remaining,highest)]
-            w,h = books[start]
-            mx_h = max(h,highest)
-            mn =float("inf")
-            if shelfWidth!=width_remaining:
-                mn = min(mn,highest+dfs(start,shelfWidth,0))
-            
-            if width_remaining>=w:
-                mn = min(mn,dfs(start+1,width_remaining-w,mx_h))
-                
-
-
-            memo[(start,width_remaining,highest)] = max(mn,mx_h)
-            return memo[(start,width_remaining,highest)]
+        dp = [0]*(n+1)
         
-        return dfs(0,shelfWidth,0)
+        for i in range(1,n+1):
+            w,h = books[i-1]
+            dp[i] = dp[i-1]+h
+
+            for j in range(i-1,0,-1):
+                wj,hj = books[j-1]
+                if w+wj>shelfWidth:
+                    break
+                h = max(h,hj)  
+                dp[i] = min(dp[i],dp[j-1]+h)
+                w = w+wj
+        
+        return dp[n]
+            
+            
+            
             
             
             
