@@ -19,7 +19,7 @@ class Solution:
                 
 
 
-            memo[(start,width_remaining,highest)] = max(mn,highest,h)
+            memo[(start,width_remaining,highest)] = max(mn,mx_h)
             return memo[(start,width_remaining,highest)]
         
         return dfs(0,shelfWidth,0)
