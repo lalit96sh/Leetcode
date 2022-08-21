@@ -41,8 +41,6 @@ class Solution:
                 
             if dest_flag:
                 st += ("L"+ l if ldest_flag else "R"+r)
-            else:
-                st += ""
 
                     
             return st, root.val==startValue or src_flag, root.val==destValue or dest_flag
