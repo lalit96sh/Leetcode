@@ -1,29 +1,37 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         
-        # coins = 0
+        coins = [i for i in coins if i<=amount]
         if amount==0:
             return 0
         
-        q = [_ for _ in coins if _ <= amount]
-        
-        curq = [(v,1) for v in q]
+        q = collections.deque()
         vis = set()
-        
-        while curq:
+        for coin in coins:
             
-            val,cs = curq.pop(0)
+            if coin==amount:
+                return 1
+            if coin not in vis and coin<amount:
+                vis.add(coin)
+                q.append(coin)
             
-            if val == amount:
-                return cs
+        level=1
+        while q:
+            level+=1
+            qlen = len(q)
             
-            for _ in q:
-                if _+val<=amount and _+val not in vis:
-                    curq.append((_+val,cs+1))
-                    vis.add(_+val)
-            
-            
+            for _ in range(qlen):
+                
+                cur_sum = q.popleft()
+                
+                for coin in coins:
+                    if (cur_sum+coin)==amount:
+                        return level
+                    if cur_sum+coin not in vis and (cur_sum+coin)<amount:
+                        q.append(cur_sum+coin)
+                        vis.add(cur_sum+coin)
         return -1
+            
         
                     
                     
