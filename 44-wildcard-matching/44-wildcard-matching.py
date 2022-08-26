@@ -1,31 +1,44 @@
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
-        
-        cur_string_index = 0
-        cur_pattern_index = 0
-        last_star = None
-        n = len(s)
-        while cur_string_index<n:
+        def remove_duplicate_stars(p: str):
+            new_string = []
+            for char in p:
+                if not new_string or char != '*':
+                    new_string.append(char)
+                elif new_string[-1] != '*':
+                    new_string.append(char)
+            return ''.join(new_string)
+        p = remove_duplicate_stars(p)
+        ns,np = len(s),len(p)
+        memo = {}
+        @lru_cache(None)
+        def dfs(start_p,start_s):
+            if (start_p,start_s) not in memo:
+                out_p = start_p==np
+                out_s = start_s==ns
+
+                if start_p==np-1 and p[start_p]=="*":
+                    res = True
+                elif out_p and out_s:
+                    res = True
+
+                elif out_p or out_s:
+                    res = False
+
+                elif s[start_s]==p[start_p] or p[start_p]=="?":
+                    res = dfs(start_p+1,start_s+1)
+
+                elif p[start_p]=="*":
+                    res = dfs(start_p+1,start_s) or dfs(start_p,start_s+1)
+                else:
+                    res = False
+
+                memo[(start_p,start_s)] = res
             
-            if cur_pattern_index>=len(p) or (s[cur_string_index]!=p[cur_pattern_index] and p[cur_pattern_index] not in {"*","?"}):
-                if last_star is None:
-                    return False
-                cur_pattern_index = last_star+1
-                cur_string_index = last_star_compared+1
-                last_star_compared = cur_string_index
-            elif p[cur_pattern_index] == "*":
-                last_star = cur_pattern_index
-                cur_pattern_index+=1
-                last_star_compared = cur_string_index
-            else:
-                cur_string_index+=1
-                cur_pattern_index+=1
-                
-        while cur_pattern_index<len(p):
-            if p[cur_pattern_index] != "*":
-                return False
-            cur_pattern_index+=1
-        
-        return True
-                
+            return memo[(start_p,start_s)]
+        return dfs(0,0)
+            
+            
+            
+            
             
