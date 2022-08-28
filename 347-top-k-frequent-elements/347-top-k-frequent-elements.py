@@ -4,11 +4,19 @@ class Solution:
         from heapq import heappop,heappush
         h = []
         counter = Counter(nums)
-        for nm in counter:
-            heappush(h,(counter[nm],nm))
-            if len(h)>k:
-                heappop(h)
+        mx = max(counter.values())
+        
+        
+        bucket = collections.defaultdict(list)
+        
+        for key in counter:
+            bucket[counter[key]].append(key)
         ans = []
-        while h:
-            ans.append(heappop(h)[1])
-        return ans[::-1]
+        kk = k
+        for i in range(mx,0,-1):
+            if k<=0:
+                break
+            k-=len(bucket[i])
+            ans.extend(bucket[i])
+            
+        return ans[-kk:]
