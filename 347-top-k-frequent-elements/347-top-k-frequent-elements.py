@@ -5,8 +5,10 @@ class Solution:
         h = []
         counter = Counter(nums)
         for nm in counter:
-            heappush(h,(-counter[nm],nm))
+            heappush(h,(counter[nm],nm))
+            if len(h)>k:
+                heappop(h)
         ans = []
-        for i in range(k):
+        while h:
             ans.append(heappop(h)[1])
-        return ans
+        return ans[::-1]
