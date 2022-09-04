@@ -31,7 +31,7 @@ class Solution:
             else:
                 
                 for i in range(start,n):
-                    if i>0 and nums[i]==nums[i-1]:
+                    if i>start and nums[i]==nums[i-1]:
                         continue
                     util(i+1,k-1,target-nums[i],cur+[nums[i]])
         
