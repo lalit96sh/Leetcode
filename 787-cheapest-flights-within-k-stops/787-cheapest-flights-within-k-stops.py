@@ -15,7 +15,7 @@ class Solution:
             (cost,(node,stop_count)) = pq.pop(0)
             
             if node==dst:
-                ans=min(ans,cost)
+                ans=cost
                 continue
             if stop_count==0:
                 continue
