@@ -14,15 +14,18 @@ class Solution:
                 root=root.left
             return ans
         def node_present(last_level_index,d,root):
-            
+            print("checking for {}".format(last_level_index))
             left = 0
             right = 2**d-1
             for _ in range(d):
                 mid = left+(right-left)//2
+                print(last_level_index,mid)
                 if last_level_index <= mid:
+                    print("left")
                     root=root.left
                     right = mid
                 else:
+                    print("right")
                     root = root.right
                     left = mid+1
             return root is not None
@@ -35,14 +38,14 @@ class Solution:
             
             left = 0
             right = 2**l-1
-            while left<=right:
-                mid = left+(right-left)//2
+            while left<right:
+                mid = left+(right-left+1)//2
                 if node_present(mid,l,root):
-                    left = mid+1
+                    left = mid
                 else:
                     right=mid-1
             
-            return 2**l-1+left
+            return 2**l-1+left+1
                     
                 
         return help(root)
